@@ -1,17 +1,22 @@
 const typeDefs = `
+ type Query {
+    me: User
+  }
+      
   type User {
     _id: ID!
     username: String!
     email: String!
-    savedBooks: [Book]!  # Ensure that savedBooks is always an array
+    bookCount: Int
+    savedBooks: [Book]!
   }
 
   type Book {
     bookId: String!
     title: String!
     authors: [String]
-    description: String  # Made optional
-    image: String  # Made optional
+    description: String  
+    image: String 
     link: String
   }
 
@@ -24,21 +29,18 @@ const typeDefs = `
     bookId: String!
     title: String!
     authors: [String]
-    description: String  # Made optional
-    image: String  # Made optional
+    description: String  
+    image: String  
     link: String
   }
 
-  type Query {
-    me: User
+  type Mutation {
+    addUser(username: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    saveBook(bookData: BookInput!): User
+    removeBook(bookId: String!): User
   }
 
-  type Mutation {
-    createUser(username: String!, email: String!, password: String!): Auth
-    login(email: String, username: String, password: String!): Auth
-    saveBook(bookData: BookInput!): User
-    deleteBook(bookId: String!): User
-  }
 `;
 
 export default typeDefs;

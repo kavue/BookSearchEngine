@@ -3,7 +3,6 @@ import { GraphQLError } from 'graphql';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 export const authenticateToken = ({ req }: any) => {
   // Allows token to be sent via req.body, req.query, or headers
   let token = req.body.token || req.query.token || req.headers.authorization;
@@ -32,9 +31,9 @@ export const authenticateToken = ({ req }: any) => {
   return req;
 };
 
-export const signToken = (username: string, email: string, _id: unknown) => {
-  // Create a payload with the user information
-  const payload = { username, email, _id };
+export const signToken = (email: string, _id: unknown) => {
+  // Create a payload with the user information (username removed)
+  const payload = { email, _id };
   const secretKey: any = process.env.JWT_SECRET_KEY; // Get the secret key from environment variables
 
   // Sign the token with the payload and secret key, and set it to expire in 2 hours
