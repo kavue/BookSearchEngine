@@ -1,10 +1,14 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import path from 'path';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url'; // Add this import
 
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename); 
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -25,7 +29,7 @@ const startApolloServer = async () => {
   if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../../client/dist')));
 
-    app.get('*', (_req, res) => {
+    app.get('*', (_req: Request, res: Response) => {
       res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
