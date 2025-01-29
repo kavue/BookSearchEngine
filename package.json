@@ -14,13 +14,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "concurrently": "^8.2.0"
   },
   "dependencies": {
     "@apollo/client": "^3.12.7",
     "@apollo/server": "^4.11.3",
     "apollo-server": "^3.13.0",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "graphql": "^16.10.0"
   }
 }
