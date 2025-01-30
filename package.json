@@ -22,6 +22,7 @@
     "@apollo/server": "^4.11.3",
     "apollo-server": "^3.13.0",
     "bcryptjs": "^2.4.3",
-    "graphql": "^16.10.0"
+    "graphql": "^16.10.0",
+    "graphql-tag": "^2.12.6"
   }
 }

@@ -20,14 +20,17 @@ const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
 
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     // Check if form is valid
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      return;
     }
-
+  
+    console.log("Submitting user data:", userFormData); 
+  
     try {
       // Execute the addUser mutation with the form data
       const { data } = await addUser({
@@ -37,22 +40,24 @@ const SignupForm = ({ handleModalClose }: { handleModalClose: () => void }) => {
           password: userFormData.password 
         },
       });
-
+  
+      console.log("Signup successful:", data); 
+  
       if (data) {
         Auth.login(data.addUser.token);
         handleModalClose();
       }
     } catch (err) {
-      console.error(err);
+      console.error("Signup error:", err);
       setShowAlert(true);
     }
-
+  
     setUserFormData({
       username: '',
       email: '',
       password: '',
     });
-  };
+  };  
 
   return (
     <>
