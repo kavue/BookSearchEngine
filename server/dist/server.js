@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
+import { authenticateToken } from './services/auth.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 3001;
@@ -12,13 +13,18 @@ const app = express();
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-});
+    context: ({ req }) => {
+        const user = authenticateToken({ req }); // Get user data directly
+        return { user }; // Attach user to context
+    },
+}); // Force ApolloServer to accept this type
 const startApolloServer = async () => {
     await server.start();
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
+    // Add GraphQL endpoint
     app.use('/graphql', expressMiddleware(server));
-    // if we're in production, serve client/dist as static assets
+    // Serve static files if in production
     if (process.env.NODE_ENV === 'production') {
         app.use(express.static(path.join(__dirname, '../../client/dist')));
         app.get('*', (_req, res) => {

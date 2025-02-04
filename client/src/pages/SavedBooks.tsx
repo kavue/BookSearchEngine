@@ -9,7 +9,9 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   // Use the useQuery hook to fetch user data
   const { loading, data } = useQuery(GET_ME);
-  const userData = data?.me || { savedBooks: [] }; // Ensure savedBooks has a default empty array
+  
+  // Default to empty savedBooks array if data is unavailable
+  const userData = data?.me ?? { savedBooks: [] };
 
   // Use the useMutation hook for the REMOVE_BOOK mutation
   const [removeBookMutation] = useMutation(REMOVE_BOOK);

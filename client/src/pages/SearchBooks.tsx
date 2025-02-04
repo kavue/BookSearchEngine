@@ -63,26 +63,26 @@ const SearchBooks = () => {
   const handleSaveBook = async (bookId: string) => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave: Book = searchedBooks.find((book) => book.bookId === bookId)!;
-
+  
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+  
     if (!token) {
       return false;
     }
-
+  
     try {
-      // Execute SAVE_BOOK mutation with the book data
+      // Execute SAVE_BOOK mutation with the correct bookData variable
       await saveBookMutation({
-        variables: { input: bookToSave },
+        variables: { bookData: {...bookToSave }}, 
       });
-
+  
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
-  };
+  };  
 
   return (
     <>

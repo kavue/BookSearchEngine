@@ -33,7 +33,7 @@ export const loginUser = (userData: User) => {
 
 // save book data for a logged in user
 export const saveBook = (bookData: Book, token: string) => {
-  return fetch('/api/users', {
+  return fetch('/api/users/books', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
