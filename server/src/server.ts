@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'node:path';
 import type { Request, Response } from 'express';
-// Import the ApolloServer class
 import {
   ApolloServer,
 } from '@apollo/server';
@@ -9,7 +8,6 @@ import {
   expressMiddleware
 } from '@apollo/server/express4';
 import { authenticateToken } from './services/auth.js';
-// Import the two parts of a GraphQL schema
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 
