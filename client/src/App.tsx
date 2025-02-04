@@ -13,7 +13,6 @@ const httpLink = createHttpLink({
 // This middleware will retrieve the token from local storage and set the HTTP request headers of every request to include the token.
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
-  console.log(token);
 
   return {
     headers: {
