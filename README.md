@@ -2,6 +2,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+<img src="./client/src/assets/BSE-image.png">
+
 ## Description
 The Book Search Engine is a full-stack application where users can create an account, log in, and save books they find interesting. The app utilizes GraphQL for the backend API and MongoDB with Mongoose for data storage. The frontend communicates with the backend using Apollo Client.
 
